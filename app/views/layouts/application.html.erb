@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>e-College</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags%>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <%= stylesheet_link_tag "application", "data-turbo-track" => "reload" %>
+    <%= javascript_importmap_tags %>
+    
+ </head>
+
+<body>
+  <header>
+
+        <ul id="dropdown1" class="dropdown-content">
+          <li><%= session_link %></li>
+          <% if logged_in? %>
+            <li><%= link_to "View your profile", student_path(current_user) %></li>
+          <% end %>
+          <li><% if !logged_in? %>
+              <li class="signup-link"><%= link_to "Sign Up", new_student_path %></li>
+          <% end %>
+ 
+        </ul>
+        <ul id="dropdown2" class="dropdown-content">
+          <li><%= session_link %></li>
+          <% if logged_in? %>
+            <li><%= link_to "View your profile", student_path(current_user) %></li>
+          <% end %>
+        </ul>
+      <nav>
+        <div class="container">
+        <%= link_to "e-College", root_path, class:"brand-logo right"%>
+        <div class="nav-wrapper">
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a> 
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><%= link_to "Courses", root_path %></li>
+        <% if logged_in? %>
+          <li><%= link_to "Students", students_path %></li>
+          <% end %>
+          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Account<i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <% flash.each do |key, message| %>
+    <div class="container">
+      <div class="row singn-up-form">
+        <div class="col s12 l12">
+            <div class="card-panel red lighten-2" id="fade-out-target">
+            <span class="white-text">
+              <%= message %>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %> 
+
+</header>
+    <main> 
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main>
+    
+    <footer class="page-footer small">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">e-College</h5>
+            <p class="grey-text text-lighten-4">Your future starts here, start studing wherever you are</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Information</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Help</a></li>
+              <li><%= link_to "About", about_path, class: "grey-text text-lighten-3" %></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Contact us</a></li>
+              </ul>
+              <ul class="sidenav" id="mobile-demo">
+              <li><%= link_to "Courses", root_path %></li>
+              <% if logged_in? %>
+                <li><%= link_to "Students", students_path %></li>
+                <% end %>
+                <a class="dropdown-trigger" href="#!" data-target="dropdown2">
+                Account
+                <i class="material-icons right">arrow_drop_down</i>
+            </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        © 2023 e-College
+        </div>
+      </div>
+    </footer>
+
+    <script>
+    $(document).ready(function() {
+      var fadeOutTarget = $('#fade-out-target');
+  
+      if (fadeOutTarget.length > 0) {
+        setTimeout(function() {
+          fadeOutTarget.fadeOut('slow');
+        }, 3000); // 3-second delay before starting the fade-out
+      }
+    });
+  </script>
+
+  </body>
+</html>

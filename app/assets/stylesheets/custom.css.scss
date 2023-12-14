@@ -1,0 +1,28 @@
+/* CSS FRAMEWORK USED FOR THIS PROJECT WAS MOSTLY MATERIALIZE */
+@import "materialize";
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* More specific selectors */
+nav.nav-extended .nav-wrapper {
+    background-color: #f5f5f5 !important;
+    padding: 10px !important;
+    border: none !important;
+}
+
+.brand-logo {
+    font-size: 24px;
+    color: #333;
+}
+
+.sign-up-form {
+  padding-top: 30px;
+}
